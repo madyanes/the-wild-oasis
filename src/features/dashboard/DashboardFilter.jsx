@@ -1,4 +1,4 @@
-import Filter from 'ui/Filter';
+import Filter from 'ui/Filter'
 
 function DashboardFilter() {
   return (
@@ -10,7 +10,7 @@ function DashboardFilter() {
         { value: '90', label: 'Last 90 days' },
       ]}
     />
-  );
+  )
 }
 
-export default DashboardFilter;
+export default DashboardFilter

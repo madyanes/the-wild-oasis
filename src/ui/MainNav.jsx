@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const NavList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-`;
+`
 
 const Link = styled.a`
   &:link,
@@ -43,4 +43,4 @@ const Link = styled.a`
   &.active:visited svg {
     color: var(--color-brand-600);
   }
-`;
+`

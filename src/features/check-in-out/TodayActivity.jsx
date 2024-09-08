@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
-import Heading from "../../ui/Heading";
-import Row from "../../ui/Row";
+import Heading from '../../ui/Heading'
+import Row from '../../ui/Row'
 
 const StyledToday = styled.div`
   /* Box */
@@ -15,7 +15,7 @@ const StyledToday = styled.div`
   gap: 2.4rem;
   grid-column: 1 / span 2;
   padding-top: 2.4rem;
-`;
+`
 
 const TodayList = styled.ul`
   overflow: scroll;
@@ -27,23 +27,23 @@ const TodayList = styled.ul`
   }
   scrollbar-width: none;
   -ms-overflow-style: none;
-`;
+`
 
 const NoActivity = styled.p`
   text-align: center;
   font-size: 1.8rem;
   font-weight: 500;
   margin-top: 0.8rem;
-`;
+`
 
 function Today() {
   return (
     <StyledToday>
-      <Row type="horizontal">
-        <Heading as="h2">Today</Heading>
+      <Row type='horizontal'>
+        <Heading as='h2'>Today</Heading>
       </Row>
     </StyledToday>
-  );
+  )
 }
 
-export default Today;
+export default Today

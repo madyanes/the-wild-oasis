@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const FileInput = styled.input`
   font-size: 1.4rem;
@@ -20,6 +20,6 @@ const FileInput = styled.input`
       background-color: var(--color-brand-700);
     }
   }
-`;
+`
 
-export default FileInput;
+export default FileInput
