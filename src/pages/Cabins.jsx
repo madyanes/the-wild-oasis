@@ -24,7 +24,7 @@ function Cabins() {
           {showForm ? 'Cancel' : 'Add new cabin'}
         </Button>
 
-        {showForm && <CreateCabinForm />}
+        {showForm && <CreateCabinForm toggleForm={setShowForm} />}
       </Row>
     </>
   )
