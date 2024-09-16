@@ -1,10 +1,9 @@
 /* eslint-disable react/prop-types */
 
 import { useForm } from 'react-hook-form'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import toast from 'react-hot-toast'
 
-import { createEditCabin } from '../../services/apiCabins'
+import { useCreateCabin } from './useCreateCabin'
+import { useEditCabin } from './useEditCabin'
 
 import Input from '../../ui/Input'
 import Form from '../../ui/Form'
@@ -17,36 +16,13 @@ function CreateCabinForm({ cabinToEdit = {}, toggleForm }) {
   const { id: editId, ...editValues } = cabinToEdit
   const isEditSession = Boolean(editId)
 
-  const queryClient = useQueryClient()
   const { register, handleSubmit, getValues, formState } = useForm({
     defaultValues: isEditSession ? editValues : {},
   })
   const { errors } = formState
 
-  const { mutate: createCabin, isPending: isCreating } = useMutation({
-    mutationFn: createEditCabin,
-    onSuccess: () => {
-      toast.success('New cabin successfully created')
-      queryClient.invalidateQueries({ queryKey: ['cabins'] })
-      toggleForm(false)
-    },
-    onError: (err) => {
-      toast.error(err.message)
-    },
-  })
-
-  const { mutate: editCabin, isPending: isEditing } = useMutation({
-    mutationFn: ({ newCabin, id }) => createEditCabin(newCabin, id),
-    onSuccess: () => {
-      toast.success('Cabin successfully updated')
-      queryClient.invalidateQueries({ queryKey: ['cabins'] })
-      toggleForm(false)
-    },
-    onError: (err) => {
-      toast.error(err.message)
-    },
-  })
-
+  const { isCreating, createCabin } = useCreateCabin()
+  const { isEditing, editCabin } = useEditCabin()
   const isWorking = isCreating || isEditing
 
   function onSubmit(newCabin) {
@@ -54,8 +30,23 @@ function CreateCabinForm({ cabinToEdit = {}, toggleForm }) {
       typeof newCabin.image === 'string' ? newCabin.image : newCabin.image[0]
 
     if (isEditSession)
-      editCabin({ newCabin: { ...newCabin, image }, id: editId })
-    else createCabin({ ...newCabin, image: image })
+      editCabin(
+        { newCabin: { ...newCabin, image }, id: editId },
+        {
+          onSuccess: () => {
+            toggleForm(false)
+          },
+        }
+      )
+    else
+      createCabin(
+        { ...newCabin, image: image },
+        {
+          onSuccess: () => {
+            toggleForm(false)
+          },
+        }
+      )
   }
 
   return (
